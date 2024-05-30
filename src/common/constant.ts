@@ -1,0 +1,2 @@
+export const PROFILE_WELFARE_BO = 'PROFILE_WELFARE_BO'
+

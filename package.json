@@ -1,0 +1,43 @@
+{
+  "name": "starpx",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "preview": "vite preview",
+    "build": "yarn build:dev",
+    "build:dev": "vite build --mode development",
+    "build:prd": "vite build --mode production",
+    "type-check": "vue-tsc --noEmit -p tsconfig.app.json --composite false",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
+    "format": "prettier --write src/"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.10.4",
+    "@aws-amplify/ui-vue": "^4.2.8",
+    "@vee-validate/yup": "^4.12.8",
+    "aws-amplify": "^6.3.4",
+    "graphql": "^16.8.1",
+    "pinia": "^2.1.7",
+    "vee-validate": "^4.12.8",
+    "vue": "^3.4.21",
+    "vue-router": "^4.3.2"
+  },
+  "devDependencies": {
+    "@types/graphql": "^14.5.0",
+    "@types/node": "^20.12.13",
+    "@vitejs/plugin-vue": "^5.0.4",
+    "@vue/eslint-config-prettier": "^9.0.0",
+    "@vue/eslint-config-typescript": "^13.0.0",
+    "@vue/tsconfig": "^0.5.1",
+    "autoprefixer": "^10.4.19",
+    "eslint": "^9.3.0",
+    "eslint-plugin-vue": "^9.26.0",
+    "postcss": "^8.4.38",
+    "prettier": "^3.2.5",
+    "tailwindcss": "^3.4.3",
+    "typescript": "^5.2.2",
+    "vite": "^5.2.0",
+    "vue-tsc": "^2.0.6"
+  }
+}
