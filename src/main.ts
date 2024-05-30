@@ -4,6 +4,11 @@ import { createApp } from 'vue'
 import { configure } from 'vee-validate'
 import App from './App.vue'
 import router from './router'
+import { Amplify } from 'aws-amplify'
+import '@aws-amplify/ui-vue'
+import { cognitoConfig } from '@/services/cognito.config'
+
+Amplify.configure(cognitoConfig)
 
 const app = createApp(App)
 
