@@ -1,5 +1,5 @@
 import '@/assets/css/app.css'
-import { cognitoConfig } from '@/services/cognito.config'
+import { cognitoConfig } from '@/appConfig/cognito.config'
 import '@aws-amplify/ui-vue'
 import { Amplify } from 'aws-amplify'
 import { createPinia } from 'pinia'

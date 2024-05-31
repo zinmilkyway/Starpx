@@ -8,6 +8,7 @@ export default defineConfig(({ mode }) => {
   // get port config from environments
   const port = parseInt(env.VITE_PORT) ?? 1234
   const isExposeHost = env.VITE_IS_EXPOSE_HOST === 'true'
+
   return {
     plugins: [vue()],
     resolve: {
@@ -25,6 +26,14 @@ export default defineConfig(({ mode }) => {
     },
     build: {
       chunkSizeWarningLimit: 1600
+    },
+    chainWebpack: (config) => {
+      config.module
+        .rule('graphql')
+        .test(/\.graphql$/)
+        .use('graphql-tag/loader')
+        .loader('graphql-tag/loader')
+        .end()
     }
   }
 })

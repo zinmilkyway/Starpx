@@ -1,9 +1,10 @@
 import { RouteRecordRawExtends } from '@/models'
 
 import main from './main'
+import gallery from './gallery'
 
 // navigation list
-const listLinks: RouteRecordRawExtends[] = [main]
+const listLinks: RouteRecordRawExtends[] = [main, gallery]
 
 export const originRouter: RouteRecordRawExtends[] = listLinks.map((item) => {
   return {

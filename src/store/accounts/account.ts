@@ -1,5 +1,5 @@
 import { useStorage } from '@/composables/common/useStorage'
-import { PROFILE_WELFARE_BO } from '@/common/constant'
+import { USER_PROFILE } from '@/common/constant'
 import { ACCESS_TOKEN, LOGIN_STATUS, REFRESH_TOKEN, ACCOUNT_PROFILE, storage } from '@/common/storage'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
@@ -10,7 +10,7 @@ export const useAccountStore = defineStore(ACCOUNT_PROFILE, () => {
   const router = useRouter()
   const isLogin = ref()
   // todo: define user info model
-  const [account, setAccount] = useStorage<any>(PROFILE_WELFARE_BO)
+  const [account, setAccount] = useStorage<any>(USER_PROFILE)
 
   const handleSaveProfile = async () => {}
 

@@ -1,2 +1,2 @@
-export const PROFILE_WELFARE_BO = 'PROFILE_WELFARE_BO'
-
+export const USER_PROFILE = 'USER_PROFILE'
+export const LOCALE = 'LOCALE'

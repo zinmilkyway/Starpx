@@ -1,5 +1,5 @@
 import { ResourcesConfig } from 'aws-amplify'
-import { AppConfig } from '@/common/configs'
+import { AppConfig } from './app.configs'
 
 export const cognitoConfig: ResourcesConfig = {
   Auth: {
