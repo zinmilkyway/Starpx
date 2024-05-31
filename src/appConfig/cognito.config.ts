@@ -7,5 +7,12 @@ export const cognitoConfig: ResourcesConfig = {
       userPoolId: AppConfig.userPoolId,
       userPoolClientId: AppConfig.userPoolClientId
     }
+  },
+  API: {
+    GraphQL: {
+      apiKey: AppConfig.apiKey,
+      endpoint: AppConfig.apiEndpoint,
+      defaultAuthMode: 'apiKey'
+    }
   }
 }
