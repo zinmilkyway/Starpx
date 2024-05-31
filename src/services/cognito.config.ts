@@ -1,8 +1,11 @@
-export const cognitoConfig = {
+import { ResourcesConfig } from 'aws-amplify'
+import { AppConfig } from '@/common/configs'
+
+export const cognitoConfig: ResourcesConfig = {
   Auth: {
     Cognito: {
-      userPoolClientId: 'eu-central-1_OW0g61kEk',
-      userPoolId: '34fbjieukpdaq7m6q35ge10ei'
+      userPoolId: AppConfig.userPoolId,
+      userPoolClientId: AppConfig.userPoolClientId
     }
   }
 }

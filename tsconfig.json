@@ -21,6 +21,7 @@
     "declarationMap": true,
     "sourceMap": true,
     "noImplicitAny": false,
+    "esModuleInterop": true,
 
     /* Linting */
     "strict": true,
