@@ -34,12 +34,21 @@ const fetchImageSetSummaries = async () => {
         }
       }
     `
-    const response: any = await client.graphql({
-      query: getImageSetSummariesQuery
-    })
+    const response: any = await client.graphql(
+      {
+        query: getImageSetSummariesQuery,
+        variables: {
+          customerId: '',
+          limit: 10
+        }
+      }
+      // {
+      //   Authorization:
+      // }
+    )
     data.value = response
   } catch (error) {
-    console.error('Error fetching image set summaries:', error)
+    console.error('Error:', error)
   }
 }
 </script>

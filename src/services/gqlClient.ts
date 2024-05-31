@@ -1,5 +1,5 @@
 import { generateClient } from 'aws-amplify/api'
-
-const client = generateClient()
+const clientConfig = {}
+const client = generateClient(clientConfig)
 
 export default client
