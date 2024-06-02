@@ -1,14 +1,18 @@
 const data = {
-    path: '/gallery',
-    name: 'Gallery',
-    isHideMenu: true,
-    nameComponent: 'Gallery',
-    component: () => import(/* webpackChunkName: "user-chunk" */ '@/pages/gallery/GalleryShowCasePage.vue'),
-    children: [],
-    meta: {
-      title: 'Gallery'
+  path: '/',
+  name: 'Gallery Show Case',
+  component: import(/* webpackChunkName: "user-chunk" */ '@/pages/router/WrapRouteView.vue'),
+  children: [
+    {
+      path: '',
+      name: 'Gallery Show Case',
+      component: () => import(/* webpackChunkName: "user-chunk" */ '@/pages/gallery/GalleryListPage.vue'),
+      children: [],
+      meta: {
+        title: 'Gallery Show Case'
+      }
     }
-  }
-  
-  export default data
-  
+  ]
+}
+
+export default data

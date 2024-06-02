@@ -24,4 +24,4 @@ export const getImageSetSummariesQuery = `
       __typename
     }
   }
-`;
+`

@@ -10,18 +10,17 @@
     "build:prd": "vite build --mode production",
     "type-check": "vue-tsc --noEmit -p tsconfig.app.json --composite false",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
-    "format": "prettier --write src/",
-    "generate": "graphql-codegen --config codegen.yml"
+    "format": "prettier --write src/"
   },
   "dependencies": {
-    "@apollo/client": "^3.10.4",
     "@aws-amplify/ui-vue": "^4.2.8",
     "@vee-validate/yup": "^4.12.8",
     "aws-amplify": "^6.3.4",
     "graphql": "^16.8.1",
-    "graphql-loader": "^1.2.1",
     "graphql-tag": "^2.12.6",
     "pinia": "^2.1.7",
+    "postprocessing": "^6.35.4",
+    "three": "^0.165.0",
     "vee-validate": "^4.12.8",
     "vue": "^3.4.21",
     "vue-i18n": "^9.13.1",
@@ -29,9 +28,13 @@
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^5.0.2",
+    "@graphql-codegen/client-preset": "^4.2.6",
     "@graphql-codegen/typescript-graphql-files-modules": "^3.0.0",
+    "@graphql-codegen/typescript-type-graphql": "^3.0.0",
+    "@parcel/watcher": "^2.4.1",
     "@types/graphql": "^14.5.0",
     "@types/node": "^20.12.13",
+    "@types/three": "^0.165.0",
     "@vitejs/plugin-vue": "^5.0.4",
     "@vue/eslint-config-prettier": "^9.0.0",
     "@vue/eslint-config-typescript": "^13.0.0",
@@ -42,6 +45,7 @@
     "postcss": "^8.4.38",
     "prettier": "^3.2.5",
     "tailwindcss": "^3.4.3",
+    "ts-node": "^10.9.2",
     "typescript": "^5.4.5",
     "vite": "^5.2.0",
     "vue-tsc": "^2.0.6"

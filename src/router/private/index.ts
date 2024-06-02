@@ -1,10 +1,9 @@
 import { RouteRecordRawExtends } from '@/models'
 
-import main from './main'
 import gallery from './gallery'
 
 // navigation list
-const listLinks: RouteRecordRawExtends[] = [main, gallery]
+const listLinks: RouteRecordRawExtends[] = [gallery]
 
 export const originRouter: RouteRecordRawExtends[] = listLinks.map((item) => {
   return {
@@ -37,7 +36,6 @@ function flattenArray(arr: RouteRecordRawExtends[]) {
         path: item.path ?? '',
         component: item?.component,
         meta: item?.meta,
-        tooltipElement: item?.tooltipElement ?? '',
         redirect: item?.redirect
       })
       if (item.children && Array.isArray(item.children) && item.children.length > 0) {
@@ -50,36 +48,25 @@ function flattenArray(arr: RouteRecordRawExtends[]) {
   return result
 }
 
-export const listRouteForwardPath = listLinks
-  .filter((item) => !item?.isHideMenu)
-  .map((item) => {
-    return {
-      path: item.path,
-      name: item.name,
-      image: item.image,
-      id: item.id,
-      nameComponent: item?.nameComponent,
-      children:
-        item?.children
-          ?.filter((_item) => !_item?.isHideMenu)
-          .map((_item) => ({
-            path: `${item.path}/${_item.path}`,
-            name: _item.name,
-            nameComponent: _item?.nameComponent,
-            id: _item.id,
-            tooltipElement: _item?.tooltipElement ?? '',
-            children: _item?.children
-              ?.filter((__item) => !__item?.isHideMenu)
-              .map((__item) => ({
-                path: `${item.path}/${_item.path}/${__item.path}`,
-                id: __item.id,
-                name: __item.name,
-                nameComponent: __item?.nameComponent,
-                tooltipElement: __item?.tooltipElement ?? ''
-              }))
-          })) ?? []
-    }
-  })
+export const listRouteForwardPath = listLinks.map((item) => {
+  return {
+    path: item.path,
+    name: item.name,
+    image: item.image,
+    id: item.id,
+    children:
+      item?.children.map((_item) => ({
+        path: `${item.path}/${_item.path}`,
+        name: _item.name,
+        id: _item.id,
+        children: _item?.children.map((__item) => ({
+          path: `${item.path}/${_item.path}/${__item.path}`,
+          id: __item.id,
+          name: __item.name
+        }))
+      })) ?? []
+  }
+})
 
 export const listRouteForwardPathHeaderLink = listLinks.map((item) => {
   return {
@@ -87,22 +74,16 @@ export const listRouteForwardPathHeaderLink = listLinks.map((item) => {
     name: item.name,
     image: item.image,
     id: item.id,
-    nameComponent: item?.nameComponent,
     children:
       item?.children?.map((_item) => ({
         path: `${item.path}/${_item.path}`,
         name: _item.name,
-        nameComponent: _item?.nameComponent,
+
         id: `${item.id}-${_item.id}`,
-        isShowTips: _item?.isShowTips ?? false,
-        tooltipElement: _item?.tooltipElement ?? '',
         children: _item?.children?.map((__item) => ({
-          tooltipElement: __item?.tooltipElement ?? '',
           path: `${item.path}/${_item.path}/${__item.path}`,
           id: `${item.id}-${_item.id}-${__item.id}`,
-          name: __item.name,
-          nameComponent: __item?.nameComponent,
-          isShowTips: __item?.isShowTips ?? false
+          name: __item.name
         }))
       })) ?? []
   }
@@ -115,10 +96,7 @@ function flattenArrayForwardPath(arr: RouteRecordRawExtends[]) {
       result.push({
         name: item.name ?? '',
         path: item.path ?? '',
-        nameComponent: item.nameComponent,
-        id: item?.id,
-        isShowTips: item?.isShowTips ?? false,
-        tooltipElement: item?.tooltipElement ?? ''
+        id: item?.id
       })
       if (item.children && Array.isArray(item.children) && item.children.length > 0) {
         recursiveFlatten(item.children)

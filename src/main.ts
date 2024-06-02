@@ -1,5 +1,5 @@
 import '@/assets/css/app.css'
-import { cognitoConfig } from '@/appConfig/cognito.config'
+import { amplifyConfig } from '@/appConfig/amplify.config'
 import '@aws-amplify/ui-vue'
 import { Amplify } from 'aws-amplify'
 import { createPinia } from 'pinia'
@@ -19,6 +19,6 @@ app.use(createPinia())
 
 app.use(router)
 
-Amplify.configure(cognitoConfig)
+Amplify.configure(amplifyConfig)
 
 app.mount('#app')

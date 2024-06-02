@@ -1,0 +1,35 @@
+# src/graphql/schema.graphql
+
+type Thumb {
+  xlarge: String
+  large: String
+  medium: String
+  small: String
+  __typename: String
+}
+
+type ImageDetail {
+  full_height: Int
+  full_url: String
+  full_width: Int
+  thumbs: Thumb
+  __typename: String
+}
+
+type ImageSet {
+  caption: String
+  set_id: String
+  state: String
+  image_detail: ImageDetail
+  __typename: String
+}
+
+type ImageSetSummaries {
+  nextToken: String
+  image_sets: [ImageSet]
+  __typename: String
+}
+
+type Query {
+  getImageSetSummaries(customerId: String!, limit: Int, nextToken: String): ImageSetSummaries
+}

@@ -8,14 +8,22 @@ const router = createRouter({
     {
       name: '',
       path: '/',
+      component: () => import(/* webpackChunkName: "user-chunk" */ '@/pages/router/MainTemplateRouteView.vue'),
       children: privateRoutes
     },
-
     {
       name: 'auth',
       path: '/auth',
       component: WrapRouteView,
       children: authRoutes,
+      meta: {
+        isNotRequiresAuth: true
+      }
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'NotFound',
+      component: () => import(/* webpackChunkName: "user-chunk" */ '@/pages/NotFoundPage.vue'),
       meta: {
         isNotRequiresAuth: true
       }

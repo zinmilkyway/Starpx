@@ -1,7 +1,7 @@
 import { ResourcesConfig } from 'aws-amplify'
 import { AppConfig } from './app.configs'
 
-export const cognitoConfig: ResourcesConfig = {
+export const amplifyConfig: ResourcesConfig = {
   Auth: {
     Cognito: {
       userPoolId: AppConfig.userPoolId,
@@ -12,7 +12,7 @@ export const cognitoConfig: ResourcesConfig = {
     GraphQL: {
       apiKey: AppConfig.apiKey,
       endpoint: AppConfig.apiEndpoint,
-      defaultAuthMode: 'apiKey'
+      defaultAuthMode: AppConfig.authMode
     }
   }
 }
