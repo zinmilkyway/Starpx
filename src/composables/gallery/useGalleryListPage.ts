@@ -1,13 +1,11 @@
-import { useLoading } from '@/composables/common/useLoading'
+import { Image } from '@/models/images/ImagePropsType'
 import { GetImageSetSummariesQueryResponseModel } from '@/models/services/gallery/ImageSetSumaryModel'
 import gqlClient from '@/services/gqlClient'
 import { getImageSetSummariesQuery } from '@/services/graphqlSchema/queries/getImageSetSummariesQuery'
 import { getCurrentUser } from 'aws-amplify/auth'
 import { onMounted, onUnmounted, ref } from 'vue'
-interface Image {
-  src: string
-  alt: string
-}
+// import { useLoading } from '@/composables/common/useLoading'
+
 export const useGalleryListPage = () => {
   const galleryData = ref()
   const nextCursor = ref()
@@ -15,15 +13,18 @@ export const useGalleryListPage = () => {
   const images = ref<Image[]>([])
   const scale = ref(1)
   const galleryContainer = ref<HTMLElement | null>(null)
-  const { setLoading, loading } = useLoading()
+  // const { setLoading, loading } = useLoading()
   const fetchLimit = 12
   let firstCallApi = true
   const showLightbox = ref(false)
   const currentIndex = ref(0)
+  const isLoading = ref(false)
+  const loadingLightbox = ref(true)
 
   const fetchGallery = async () => {
     try {
-      setLoading(true)
+      // setLoading(true)
+      isLoading.value = true
       const client = await gqlClient()
       const user = await getCurrentUser()
       const { loginId } = user.signInDetails!
@@ -37,7 +38,8 @@ export const useGalleryListPage = () => {
     } catch (error) {
       throw new Error('Failed to fetch')
     } finally {
-      setLoading(false)
+      // setLoading(false)
+      isLoading.value = false
     }
   }
 
@@ -62,13 +64,19 @@ export const useGalleryListPage = () => {
     nextCursor.value = getImageSetSummaries?.nextToken
   }
 
+  const resetLightBox = () => {
+    scale.value = 0.8
+    loadingLightbox.value = true
+  }
   const openLightbox = (index: number) => {
     currentIndex.value = index
     showLightbox.value = true
+    resetLightBox()
   }
 
   const closeLightbox = () => {
     showLightbox.value = false
+    resetLightBox()
   }
 
   const zoomImage = (event: WheelEvent) => {
@@ -80,10 +88,18 @@ export const useGalleryListPage = () => {
 
   const nextImage = () => {
     currentIndex.value = (currentIndex.value + 1) % imagesExtraLarge.value.length
+    resetLightBox()
   }
 
   const prevImage = () => {
     currentIndex.value = (currentIndex.value - 1 + imagesExtraLarge.value.length) % imagesExtraLarge.value.length
+    resetLightBox()
+  }
+
+  const onLoadingLightbox = () => {
+    setTimeout(() => {
+      loadingLightbox.value = false
+    }, 500)
   }
 
   // todo: use IntersectionObserver
@@ -96,11 +112,14 @@ export const useGalleryListPage = () => {
     } else {
       return false
     }
-  } 
+  }
   const handleScroll = (_event: Event) => {
+    if (showLightbox.value) {
+      return
+    }
     setTimeout(() => {
       const isEndList = elementIsVisibleInViewport()
-      if (isEndList && !loading?.value) {
+      if (isEndList && !isLoading.value) {
         handleFetchGallery()
       }
     }, 200)
@@ -127,6 +146,9 @@ export const useGalleryListPage = () => {
     zoomImage,
     scale,
     handleScroll,
-    imagesExtraLarge
+    imagesExtraLarge,
+    isLoading,
+    onLoadingLightbox,
+    loadingLightbox
   }
 }
