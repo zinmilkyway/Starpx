@@ -1,14 +1,12 @@
 import { USER_PROFILE } from '@/common/constant'
 import { AUTH_LOGIN_ROUTE, HOME_PAGE_ROUTE } from '@/common/router'
 import { ACCOUNT_PROFILE } from '@/common/storage'
-import { useLoading } from '@/composables/common/useLoading'
 import { useStorage } from '@/composables/common/useStorage'
 import { useAuthenticator } from '@aws-amplify/ui-vue'
-import { AuthError, SignInInput } from 'aws-amplify/auth'
+import { AuthError, signIn, SignInInput } from 'aws-amplify/auth'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { signIn } from 'aws-amplify/auth'
 
 export const useAccountStore = defineStore(ACCOUNT_PROFILE, () => {
   const isLogin = ref()
@@ -23,7 +21,9 @@ export const useAccountStore = defineStore(ACCOUNT_PROFILE, () => {
       await auth.signOut()
       setAccount('')
       router.push(AUTH_LOGIN_ROUTE)
-    } catch (error) {}
+    } catch (error) {
+      // empty
+    }
   }
 
   const handleSignIn = async (account: SignInInput) => {

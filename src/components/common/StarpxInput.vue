@@ -55,7 +55,7 @@ const onFocus = () => {
         "
       >
         <slot name="icon">
-          <component :is="$props.icon" v-if="$props.icon" class="wf-icon-input-text wf-pointer" />
+          <component :is="$props.icon" v-if="$props.icon" class="cursor-pointer" />
         </slot>
       </button>
     </div>

@@ -23,9 +23,8 @@ const {
     <!-- <AuthBackground /> -->
     <div ref="galleryContainer" @scroll="handleScroll">
       <div class="flex p-10 justify-center items-center bg-primary min-h-screen">
-        <div class="gallery flex flex-wrap items-center justify-center">
+        <div class="gallery flex flex-wrap items-center justify-center" v-if="images">
           <img
-            v-if="images"
             v-for="(image, index) in images"
             :key="index"
             :src="image.src"
@@ -34,9 +33,9 @@ const {
             class="w-1/4 h-auto m-2 cursor-pointer"
           />
           <!-- todo: add skeleton -->
-          <div v-else class="skeleton"></div>
           <div v-if="images" id="load-more"></div>
         </div>
+        <div v-else class="skeleton"></div>
       </div>
 
       <div v-if="showLightbox" class="fixed top-0 left-0 w-full h-full bg-gray-600 bg-opacity-90 flex items-center justify-center">

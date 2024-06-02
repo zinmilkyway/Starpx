@@ -2,7 +2,7 @@
 import StarpxHeader from '@/components/common/StarpxHeader.vue'
 </script>
 <template>
-  <div id="wf-main">
+  <div id="main-app">
     <StarpxHeader />
     <router-view></router-view>
   </div>

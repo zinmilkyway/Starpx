@@ -96,7 +96,7 @@ export const useGalleryListPage = () => {
     } else {
       return false
     }
-  }
+  } 
   const handleScroll = (_event: Event) => {
     setTimeout(() => {
       const isEndList = elementIsVisibleInViewport()
