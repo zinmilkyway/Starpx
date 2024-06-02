@@ -2,8 +2,20 @@
 import { useGalleryListPage } from '@/composables/gallery/useGalleryListPage'
 // import AuthBackground from '../authentication/AuthBackground.vue';
 
-const { scale, handleScroll, galleryContainer, images, showLightbox, prevImage, nextImage, currentIndex, openLightbox, closeLightbox, zoomImage } =
-  useGalleryListPage()
+const {
+  scale,
+  handleScroll,
+  galleryContainer,
+  images,
+  imagesExtraLarge,
+  showLightbox,
+  prevImage,
+  nextImage,
+  currentIndex,
+  openLightbox,
+  closeLightbox,
+  zoomImage
+} = useGalleryListPage()
 </script>
 
 <template>
@@ -19,7 +31,7 @@ const { scale, handleScroll, galleryContainer, images, showLightbox, prevImage, 
             :src="image.src"
             alt=""
             @click="openLightbox(index)"
-            class="w-1/3 h-auto m-2 cursor-pointer"
+            class="w-1/4 h-auto m-2 cursor-pointer"
           />
           <!-- todo: add skeleton -->
           <div v-else class="skeleton"></div>
@@ -32,7 +44,7 @@ const { scale, handleScroll, galleryContainer, images, showLightbox, prevImage, 
         <button class="left-12 z-10 text-white absolute text-4xl" @click.prevent="prevImage">&#10094;</button>
         <img
           @wheel.prevent="zoomImage"
-          :src="images[currentIndex].src"
+          :src="imagesExtraLarge[currentIndex].src"
           alt=""
           class="max-w-[90%] max-h-[90%] cursor-pointer transition-all duration-300 ease-in-out"
           :style="{ transform: `scale(${scale})` }"

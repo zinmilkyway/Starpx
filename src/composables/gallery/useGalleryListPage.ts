@@ -11,6 +11,7 @@ interface Image {
 export const useGalleryListPage = () => {
   const galleryData = ref()
   const nextCursor = ref()
+  const imagesExtraLarge = ref<Image[]>([])
   const images = ref<Image[]>([])
   const scale = ref(1)
   const galleryContainer = ref<HTMLElement | null>(null)
@@ -49,10 +50,15 @@ export const useGalleryListPage = () => {
     const { getImageSetSummaries } = await fetchGallery()
     galleryData.value = getImageSetSummaries
     const newImages = getImageSetSummaries.image_sets.map((imageSet) => ({
+      src: imageSet.image_detail.thumbs.medium,
+      alt: imageSet.caption
+    }))
+    const newImagesXL = getImageSetSummaries.image_sets.map((imageSet) => ({
       src: imageSet.image_detail.thumbs.xlarge,
       alt: imageSet.caption
     }))
     images.value = [...images.value, ...newImages]
+    imagesExtraLarge.value = [...imagesExtraLarge.value, ...newImagesXL]
     nextCursor.value = getImageSetSummaries?.nextToken
   }
 
@@ -73,11 +79,11 @@ export const useGalleryListPage = () => {
   }
 
   const nextImage = () => {
-    currentIndex.value = (currentIndex.value + 1) % images.value.length
+    currentIndex.value = (currentIndex.value + 1) % imagesExtraLarge.value.length
   }
 
   const prevImage = () => {
-    currentIndex.value = (currentIndex.value - 1 + images.value.length) % images.value.length
+    currentIndex.value = (currentIndex.value - 1 + imagesExtraLarge.value.length) % imagesExtraLarge.value.length
   }
 
   // todo: use IntersectionObserver
@@ -120,6 +126,7 @@ export const useGalleryListPage = () => {
     closeLightbox,
     zoomImage,
     scale,
-    handleScroll
+    handleScroll,
+    imagesExtraLarge
   }
 }
