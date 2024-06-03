@@ -11,19 +11,15 @@ export const useGalleryListPage = () => {
   const nextCursor = ref()
   const imagesExtraLarge = ref<Image[]>([])
   const images = ref<Image[]>([])
-  const scale = ref(1)
   const galleryContainer = ref<HTMLElement | null>(null)
-  // const { setLoading, loading } = useLoading()
   const fetchLimit = 12
   let firstCallApi = true
   const showLightbox = ref(false)
   const currentIndex = ref(0)
   const isLoading = ref(false)
-  const loadingLightbox = ref(true)
 
   const fetchGallery = async () => {
     try {
-      // setLoading(true)
       isLoading.value = true
       const client = await gqlClient()
       const user = await getCurrentUser()
@@ -38,7 +34,6 @@ export const useGalleryListPage = () => {
     } catch (error) {
       throw new Error('Failed to fetch')
     } finally {
-      // setLoading(false)
       isLoading.value = false
     }
   }
@@ -63,46 +58,23 @@ export const useGalleryListPage = () => {
     imagesExtraLarge.value = [...imagesExtraLarge.value, ...newImagesXL]
     nextCursor.value = getImageSetSummaries?.nextToken
   }
-
-  const resetLightBox = () => {
-    scale.value = 0.8
-    loadingLightbox.value = true
-  }
   const openLightbox = (index: number) => {
     currentIndex.value = index
     showLightbox.value = true
-    resetLightBox()
   }
 
   const closeLightbox = () => {
     showLightbox.value = false
-    resetLightBox()
-  }
-
-  const zoomImage = (event: WheelEvent) => {
-    event.preventDefault()
-    const delta = event.deltaY > 0 ? -0.1 : 0.1
-    const newScale = Math.max(0.5, scale.value + delta)
-    scale.value = newScale
   }
 
   const nextImage = () => {
     currentIndex.value = (currentIndex.value + 1) % imagesExtraLarge.value.length
-    resetLightBox()
   }
 
   const prevImage = () => {
     currentIndex.value = (currentIndex.value - 1 + imagesExtraLarge.value.length) % imagesExtraLarge.value.length
-    resetLightBox()
   }
 
-  const onLoadingLightbox = () => {
-    setTimeout(() => {
-      loadingLightbox.value = false
-    }, 500)
-  }
-
-  // todo: use IntersectionObserver
   const elementIsVisibleInViewport = () => {
     const el = document.getElementById('load-more')
     if (el) {
@@ -135,20 +107,16 @@ export const useGalleryListPage = () => {
   })
 
   return {
+    handleScroll,
     galleryContainer,
     images,
+    imagesExtraLarge,
     showLightbox,
     prevImage,
     nextImage,
     currentIndex,
     openLightbox,
     closeLightbox,
-    zoomImage,
-    scale,
-    handleScroll,
-    imagesExtraLarge,
-    isLoading,
-    onLoadingLightbox,
-    loadingLightbox
+    isLoading
   }
 }

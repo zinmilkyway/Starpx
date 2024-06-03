@@ -14,7 +14,7 @@ const onLoad = () => {
 
 <template>
   <div>
-    <StarpxImageLoadingSkeleton v-if="loading" class="w-full h-[60vh] object-cover rounded-md" />
-    <img :src="props.src" @load="onLoad" :alt="props.alt" class="w-full h-[60vh] object-cover rounded-md" :style="{ display: loading ? 'none' : 'block' }" />
+    <StarpxImageLoadingSkeleton v-if="loading" class="w-full aspect-video object-cover rounded-md" />
+    <img :src="props.src" @load="onLoad" :alt="props.alt" class="w-full aspect-video object-cover rounded-md" :style="{ display: loading ? 'none' : 'block' }" />
   </div>
 </template>

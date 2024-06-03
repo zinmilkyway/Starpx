@@ -13,8 +13,8 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="flex flex-row gap-10 justify-center items-center py-4 bg-second sticky top-0 z-10">
-    <span class="text-lg font-bold text-zinc-100">Welcome back, {{ username }}</span>
-    <StarpxButton @click="handleSignOut" class="!w-28 font-bold" label="Sign out" />
+  <div class="flex flex-row xl:gap-10 gap-2 md:gap-4 justify-center items-center xl:py-4 px-4 py-2 bg-second sticky top-0 z-10">
+    <span class="text-sm xl:text-lg font-bold text-zinc-100">Welcome back, {{ username }}</span>
+    <StarpxButton @click="handleSignOut" class="xl:w-28 w-24 text-sm xl:text-lg font-bold" label="Sign out" />
   </div>
 </template>
