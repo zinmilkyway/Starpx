@@ -1,8 +1,9 @@
 import { Image } from '@/models/images/ImagePropsType'
 import { GetImageSetSummariesQueryResponseModel } from '@/models/services/gallery/ImageSetSumaryModel'
-import gqlClient from '@/services/gqlClient'
 import { getImageSetSummariesQuery } from '@/services/graphqlSchema/queries/getImageSetSummariesQuery'
-import { getCurrentUser } from 'aws-amplify/auth'
+import { gqlService } from '@/services/services'
+import { useAccountStore } from '@/store/accounts/account'
+import { storeToRefs } from 'pinia'
 import { onMounted, onUnmounted, ref } from 'vue'
 // import { useLoading } from '@/composables/common/useLoading'
 
@@ -17,18 +18,14 @@ export const useGalleryListPage = () => {
   const showLightbox = ref(false)
   const currentIndex = ref(0)
   const isLoading = ref(false)
+  const accountStore = useAccountStore()
+  const { account } = storeToRefs(accountStore)
 
   const fetchGallery = async () => {
     try {
       isLoading.value = true
-      const client = await gqlClient()
-      const user = await getCurrentUser()
-      const { loginId } = user.signInDetails!
-      const variables = { customerId: loginId, limit: fetchLimit, nextToken: nextCursor.value }
-      const { data } = (await client.graphql<string>({
-        query: getImageSetSummariesQuery,
-        variables
-      })) as { data: GetImageSetSummariesQueryResponseModel }
+      const variables = { customerId: account.value, limit: fetchLimit, nextToken: nextCursor.value }
+      const { data } = (await gqlService.query(getImageSetSummariesQuery, variables)) as { data: GetImageSetSummariesQueryResponseModel }
 
       return data
     } catch (error) {

@@ -16,7 +16,6 @@ const gqlClient = (): Promise<V6Client> => {
         resolve(client)
       })
       .catch(() => {
-        // auth.signOut()
         reject(new AuthError({ name: UNAUTHORIZE, message: 'Unauthorized' }))
       })
   })

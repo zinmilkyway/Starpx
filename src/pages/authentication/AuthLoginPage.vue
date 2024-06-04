@@ -55,7 +55,13 @@ const toggleShowPassword = () => {
 
 const schema = { username: isEmail, password: isPasswordValid }
 
-const { values, setFieldValue, validate } = useForm<SignInModel>({ validationSchema: schema })
+const { values, setFieldValue, validate } = useForm<SignInModel>({
+  validationSchema: schema,
+  initialValues: {
+    username: 'hendrik@starpx.com',
+    password: 'StarpxStarpx1!'
+  }
+})
 
 const handleInput = (field, val) => {
   invalidAccount.value = false
@@ -64,17 +70,17 @@ const handleInput = (field, val) => {
 </script>
 
 <template>
-  <div class="flex h-screen items-center justify-center">
+  <div class="flex h-screen w-screen items-center justify-center">
     <AuthBackground />
     <!-- todo: add config color and classes -->
-    <div class="bg-forth bg-opacity-50 rounded-lg flex flex-col items-center justify-center relative h-[500px] p-10 gap-8">
+    <div class="bg-forth bg-opacity-50 rounded-lg flex flex-col items-center justify-center relative h-[500px] xl:m-w-[500px] p-10 gap-8">
       <!-- header -->
       <div class="flex flex-row items-center justify-center py-4 gap-4 w-full rounded-md">
         <img class="w-14" alt="starpx" src="/public/favicon.svg" />
         <span class="text-4xl font-bold text-zinc-100">StarPX</span>
       </div>
       <!-- form body -->
-      <div class="flex flex-col gap-3 w-5/6">
+      <div class="flex flex-col gap-3 w-5/6 md:min-w-[400px]">
         <div class="flex flex-col gap-2">
           <span class="text-md font-bold text-zinc-100">Enter your username</span>
           <StarpxInput

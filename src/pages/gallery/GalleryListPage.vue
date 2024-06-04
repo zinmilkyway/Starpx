@@ -23,7 +23,7 @@ const {
   <div class="bg-primary">
     <div ref="galleryContainer " @scroll="handleScroll">
       <div class="flex 2xl:p-12 xl:p-6 sm:p-4 justify-center items-center min-h-screen flex-col">
-        <div class="gallery flex flex-wrap items-center justify-center w-full h-full mb-6" v-if="images.length > 0">
+        <div class="gallery flex flex-wrap items-center justify-center w-full h-full mb-2" v-if="images.length > 0">
           <div class="2xl:w-5/12 xl:w-5/6 w-11/12 aspect-video p-2 cursor-pointer" v-for="(image, index) in images" :key="index">
             <StarpxImageLoader class="w-full h-full" @click="openLightbox(index)" :src="image.src" />
           </div>

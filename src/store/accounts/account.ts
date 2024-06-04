@@ -10,7 +10,6 @@ import { useRouter } from 'vue-router'
 
 export const useAccountStore = defineStore(ACCOUNT_PROFILE, () => {
   const isLogin = ref()
-  // todo: define user info model
   const [account, setAccount] = useStorage<any>(USER_PROFILE)
 
   const auth = useAuthenticator()
@@ -19,10 +18,12 @@ export const useAccountStore = defineStore(ACCOUNT_PROFILE, () => {
   const handleSignOut = async () => {
     try {
       await auth.signOut()
-      setAccount('')
-      router.push(AUTH_LOGIN_ROUTE)
     } catch (error) {
       // empty
+    } finally {
+      setAccount('')
+      isLogin.value = false
+      router.push(AUTH_LOGIN_ROUTE)
     }
   }
 
