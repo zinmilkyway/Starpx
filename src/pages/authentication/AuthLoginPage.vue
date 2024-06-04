@@ -42,7 +42,8 @@ const handleSignInClick = async () => {
       invalidAccount.value = true
       throw new Error('Invalid email or password')
     }
-  } catch {
+  } catch(e) {
+    console.log(e)
     invalidAccount.value = true
   } finally {
     setLoading(false)
