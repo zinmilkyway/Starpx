@@ -39,6 +39,18 @@ const zoomImage = (event: WheelEvent | MouseEvent) => {
     scale.value = newScale
   }
 }
+const zoomIn = (event: MouseEvent) => {
+  event.preventDefault()
+  const zoomAmount = 0.1
+  const newScale = Math.max(0.5, scale.value + zoomAmount)
+  scale.value = newScale
+}
+const zoomOut = (event: MouseEvent) => {
+  event.preventDefault()
+  const zoomAmount = -0.1
+  const newScale = Math.max(0.5, scale.value + zoomAmount)
+  scale.value = newScale
+}
 
 const onLoadingLightbox = () => {
   setTimeout(() => {
@@ -83,7 +95,11 @@ onMounted(() => {
 <template>
   <div class="w-full h-full overflow-hidden fixed top-0 right-0 left-0 z-50 flex justify-center items-center">
     <AuthBackground />
-    <button class="absolute md:right-12 md:top-12 top-4 right-6 xl:text-4xl text-2xl text-white z-30" @click.prevent="handleCloseLightBox">x</button>
+    <div class="absolute md:right-12 md:top-12 top-4 right-6 xl:text-4xl text-2xl text-white z-30 flex flex-col gap-1">
+      <button class="" @click.prevent="handleCloseLightBox">x</button>
+      <button class="mt-2" @click.prevent="zoomIn">+</button>
+      <button class="" @click.prevent="zoomOut">-</button>
+    </div>
     <div class="flex flex-row items-center justify-center gap-2 md:gap-6 px-2 w-full">
       <button class="left-12 z-30 text-white xl:text-4xl sm:text-2xl text-xl" @click.prevent="prevImage">&#10094;</button>
       <div
