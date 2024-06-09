@@ -7,7 +7,7 @@ import IconHiddenPassword from '@/components/icon/IconHiddenPassword.vue'
 import IconShowPassword from '@/components/icon/IconShowPassword.vue'
 import { useLoading } from '@/composables/common/useLoading'
 import { useForm } from 'vee-validate'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import AuthBackground from './AuthBackground.vue'
 import { useAccountStore } from '@/store/accounts/account'
@@ -42,8 +42,7 @@ const handleSignInClick = async () => {
       invalidAccount.value = true
       throw new Error('Invalid email or password')
     }
-  } catch(e) {
-    console.log(e)
+  } catch (e) {
     handleSignOut()
     invalidAccount.value = true
   } finally {
@@ -69,6 +68,10 @@ const handleInput = (field, val) => {
   invalidAccount.value = false
   setFieldValue(field, val.trim())
 }
+onMounted(() => {
+  localStorage.clear()
+})
+
 </script>
 
 <template>
