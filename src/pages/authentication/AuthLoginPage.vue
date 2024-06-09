@@ -25,7 +25,7 @@ export interface SignInModel {
   password: string
 }
 
-const { setAccount, handleSignIn } = useAccountStore()
+const { setAccount, handleSignIn, handleSignOut } = useAccountStore()
 
 const handleSignInClick = async () => {
   try {
@@ -43,7 +43,8 @@ const handleSignInClick = async () => {
       throw new Error('Invalid email or password')
     }
   } catch(e) {
-    // console.log(e)
+    console.log(e)
+    handleSignOut()
     invalidAccount.value = true
   } finally {
     setLoading(false)

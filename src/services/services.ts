@@ -10,10 +10,11 @@ class GqlService {
     } catch (err: any) {
       if (err.errors && err.errors[0]) {
         const errorCode = err.errors[0].message
+        console.log(err)
         if (errorCode === 'Unauthorized' || errorCode === 'TokenExpiredException') {
           this.accountStore.handleSignOut()
         } else {
-          // console.log('Other GraphQL Error:', err.errors[0])
+          console.log('Other GraphQL Error:', err.errors[0])
         }
       } else {
         this.accountStore.handleSignOut()
